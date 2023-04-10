@@ -25,4 +25,15 @@ export class UserService implements IUserService {
     console.log('User: ', x);
     return x;
   }
+
+  async updateUser(user: User, details: UserDetails): Promise<User> {
+    console.log('Updating user: ', user);
+    const updatedUser = await this.userModel.findOneAndUpdate(
+      { discordId: user.discordId },
+      details,
+      { new: true }
+    );
+    console.log('Updated user: ', updatedUser);
+    return updatedUser;
+  }
 }

@@ -10,6 +10,6 @@ export class AuthService implements IAuthService {
 
   async validateUser(details: UserDetails): Promise<User> {
     const user = await this.userService.findUser(details.discordId);
-    return user || this.userService.createUser(details);
+    return user ? this.userService.updateUser(user, details) : this.userService.createUser(details);
   }
 }
